@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">OCRApplication</string>
+    <string name="scan_failed">Scan Failed: Found nothing to scan</string>
+    <string name="could_not_set_up_detector">Could not set up the detector!</string>
 </resources>
