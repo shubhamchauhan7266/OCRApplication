@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int index = 0; index < textBlocks.size(); index++) {
                         //extract scanned text blocks here
                         TextBlock tBlock = textBlocks.valueAt(index);
-                        blocks = blocks + tBlock.getValue() + "\n" + "\n";
+                        blocks = blocks + tBlock.getValue() + "\n" ;
                         for (Text line : tBlock.getComponents()) {
                             //extract scanned text lines here
                             lines = lines + line.getValue() + "\n";
@@ -100,14 +100,14 @@ public class MainActivity extends AppCompatActivity {
                         scanResults.setText(R.string.scan_failed);
                     } else {
                         scanResults.setText(scanResults.getText() + "Blocks: " + "\n");
-                        scanResults.setText(scanResults.getText() + blocks + "\n");
-                        scanResults.setText(scanResults.getText() + "---------" + "\n");
-                        scanResults.setText(scanResults.getText() + "Lines: " + "\n");
-                        scanResults.setText(scanResults.getText() + lines + "\n");
-                        scanResults.setText(scanResults.getText() + "---------" + "\n");
-                        scanResults.setText(scanResults.getText() + "Words: " + "\n");
-                        scanResults.setText(scanResults.getText() + words + "\n");
-                        scanResults.setText(scanResults.getText() + "---------" + "\n");
+                        scanResults.setText(String.valueOf(scanResults.getText() + blocks));
+//                        scanResults.setText(scanResults.getText() + "---------" + "\n");
+//                        scanResults.setText(scanResults.getText() + "Lines: " + "\n");
+//                        scanResults.setText(scanResults.getText() + lines + "\n");
+//                        scanResults.setText(scanResults.getText() + "---------" + "\n");
+//                        scanResults.setText(scanResults.getText() + "Words: " + "\n");
+//                        scanResults.setText(scanResults.getText() + words + "\n");
+//                        scanResults.setText(scanResults.getText() + "---------" + "\n");
                     }
                 } else {
                     scanResults.setText(R.string.could_not_set_up_detector);
@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeStream(ctx.getContentResolver().openInputStream(uri), null, bmOptions);
+
         int photoW = bmOptions.outWidth;
         int photoH = bmOptions.outHeight;
 
@@ -156,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
         bmOptions.inJustDecodeBounds = false;
         bmOptions.inSampleSize = scaleFactor;
 
-        return BitmapFactory.decodeStream(ctx.getContentResolver()
-                .openInputStream(uri), null, bmOptions);
+        return BitmapFactory.decodeStream(ctx.getContentResolver().openInputStream(uri), null, bmOptions);
     }
 }
